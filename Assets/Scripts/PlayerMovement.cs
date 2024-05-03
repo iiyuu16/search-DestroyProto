@@ -6,9 +6,15 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 100f;
     public float acceleration = 5f;
     public float deceleration = 10f;
+    public Rigidbody rb;
 
     private float currentSpeed = 0f;
     private bool isBraking = false;
+
+    public void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
