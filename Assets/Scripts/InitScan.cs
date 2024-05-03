@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InitScan : MonoBehaviour
@@ -7,32 +5,58 @@ public class InitScan : MonoBehaviour
     public static InitScan instance;
     public ParticleSystem scanner;
     public float duration = 3;
-    public float size = 30;
+    public float maxSize = 30;
+    public float growthRate = 1f;
+    public float startingSize = 0.1f;
 
-    void Awake()
+    private SphereCollider sphereCollider;
+    private bool isExpanding = false;
+
+    void Start()
     {
-        MakeInstance();
+        sphereCollider = gameObject.AddComponent<SphereCollider>();
+        sphereCollider.isTrigger = true;
+        sphereCollider.radius = startingSize;
     }
-
-    void MakeInstance()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-    }
-
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             scanner.Play();
+            StartExpanding();
+        }
+
+        if (isExpanding)
+        {
+            ExpandCollider();
         }
     }
 
+    void StartExpanding()
+    {
+        isExpanding = true;
+    }
+
+    void ExpandCollider()
+    {
+        if (sphereCollider.radius < maxSize)
+        {
+            sphereCollider.radius += growthRate * Time.deltaTime;
+        }
+        else
+        {
+            sphereCollider.radius = startingSize;
+            isExpanding = false;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Target"))
+        {
+            Debug.Log("Target detected in range");
+            // Add your code to change the mesh here
+        }
+    }
 }

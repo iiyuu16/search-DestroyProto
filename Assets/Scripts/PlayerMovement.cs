@@ -6,15 +6,9 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 100f;
     public float acceleration = 5f;
     public float deceleration = 10f;
-    public Rigidbody rb;
 
     private float currentSpeed = 0f;
     private bool isBraking = false;
-
-    public void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
 
     private void Update()
     {
@@ -33,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                isBraking = false; // Reset braking if W is pressed while braking
+                isBraking = false;
             }
         }
         else if (Input.GetKey(KeyCode.S))
@@ -61,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         if (isBraking)
         {
             currentSpeed -= deceleration * Time.deltaTime;
-            currentSpeed = Mathf.Clamp(currentSpeed, 0f, moveSpeed); // Ensure speed doesn't go below 0
+            currentSpeed = Mathf.Clamp(currentSpeed, 0f, moveSpeed);
         }
     }
 }
