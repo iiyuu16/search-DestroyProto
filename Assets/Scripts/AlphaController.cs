@@ -24,7 +24,7 @@ public class AlphaController : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other)
-    {
+    {        
         if (other.CompareTag("Player"))
         {
             Color newColor = objectRenderer.material.color;
