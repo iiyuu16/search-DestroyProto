@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Target
   - Scanner
+  - PlayerAttk
   layers:
   - Default
   - TransparentFX

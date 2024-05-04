@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class InitScan : MonoBehaviour
 {
     public static InitScan instance;
+    public event Action<float> OnRevealDurationOver; // Event for when the reveal duration is over
     public ParticleSystem scanner;
     public float scanDuration = 3f; // Duration of the scanning effect
     public float revealDuration = 3f; // Duration for which the target stays revealed
@@ -20,6 +22,7 @@ public class InitScan : MonoBehaviour
 
     void Start()
     {
+        instance = this;
         sphereCollider = gameObject.AddComponent<SphereCollider>();
         sphereCollider.isTrigger = true;
         sphereCollider.radius = startingSize;
@@ -38,7 +41,7 @@ public class InitScan : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             scanner.Play();
             StartExpanding();
@@ -98,12 +101,13 @@ public class InitScan : MonoBehaviour
 
     IEnumerator RevertMaterialAfterDelay(Renderer targetRenderer)
     {
-        yield return new WaitForSeconds(scanDuration + revealDuration);
+        yield return new WaitForSeconds(revealDuration);
 
         // Revert the material to the original after the reveal duration
         if (targetRenderer != null)
         {
             targetRenderer.material = originalMaterial;
+            OnRevealDurationOver?.Invoke(revealDuration); // Invoke the event
         }
     }
 }
