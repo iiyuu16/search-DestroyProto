@@ -6,39 +6,33 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed = 100f;
     public float acceleration = 5f;
     public float deceleration = 10f;
-    public float boostMultiplier = 2f; // Multiplier for boost speed
 
     private float currentSpeed = 0f;
     private bool isBraking = false;
-    public bool isBoosting = false;
 
     private void Update()
     {
         HandleMovement();
         HandleRotation();
         ApplyBrake();
-        HandleBoost();
     }
 
     private void HandleMovement()
     {
-        if (!isBoosting)
+        if (Input.GetKey(KeyCode.W))
         {
-            if (Input.GetKey(KeyCode.W))
+            if (!isBraking)
             {
-                if (!isBraking)
-                {
-                    currentSpeed += acceleration * Time.deltaTime;
-                }
-                else
-                {
-                    isBraking = false;
-                }
+                currentSpeed += acceleration * Time.deltaTime;
             }
-            else if (Input.GetKey(KeyCode.S))
+            else
             {
-                isBraking = true;
+                isBraking = false;
             }
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            isBraking = true;
         }
 
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
@@ -58,26 +52,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyBrake()
     {
-        if (isBraking && !isBoosting)
+        if (isBraking)
         {
             currentSpeed -= deceleration * Time.deltaTime;
             currentSpeed = Mathf.Clamp(currentSpeed, 0f, moveSpeed); // Cap the speed to moveSpeed
-        }
-    }
-
-
-    private void HandleBoost()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            isBoosting = true;
-            currentSpeed *= boostMultiplier; // Increase speed when boosting
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isBoosting = false;
-            currentSpeed /= boostMultiplier; // Reset speed to normal after boosting
         }
     }
 }

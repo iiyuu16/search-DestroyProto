@@ -81,6 +81,8 @@ public class InitScan : MonoBehaviour
             Renderer targetRenderer = other.GetComponent<Renderer>();
             if (targetRenderer != null && newMaterial != null)
             {
+                // Store the original material before applying the new material
+                Material originalMaterial = targetRenderer.material;
                 targetRenderer.material = newMaterial;
 
                 // Cancel the previous coroutine if running
@@ -90,7 +92,7 @@ public class InitScan : MonoBehaviour
                 }
 
                 // Start a new coroutine to revert material after the reveal duration
-                revertMaterialCoroutine = StartCoroutine(RevertMaterialAfterDelay(targetRenderer));
+                revertMaterialCoroutine = StartCoroutine(RevertMaterialAfterDelay(targetRenderer, originalMaterial));
             }
             else
             {
@@ -99,7 +101,7 @@ public class InitScan : MonoBehaviour
         }
     }
 
-    IEnumerator RevertMaterialAfterDelay(Renderer targetRenderer)
+    IEnumerator RevertMaterialAfterDelay(Renderer targetRenderer, Material originalMaterial)
     {
         yield return new WaitForSeconds(revealDuration);
 
