@@ -344,10 +344,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad69fba142966b4c97ff6bb1b805448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 8
   rotationSpeed: 180
-  acceleration: 5
-  deceleration: 8
+  acceleration: 3
+  deceleration: 6
+  boostSpeed: 8
+  boostCD: 10
+  boostRegenDelay: 10
+  maxBoosts: 3
+  boostIndicator:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  boostIcon: {fileID: 7482667652216324306, guid: e1c79a63f73ad6c46b117273230eabd1, type: 3}
+  nullIcon: {fileID: 21300000, guid: 0157dd2bc2296d44ab7af5ff64b2de5e, type: 3}
 --- !u!65 &9004435441446529444
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -405,11 +415,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8395052786137055891}
+  - component: {fileID: 320123719098764705}
+  - component: {fileID: 832482793996661607}
   - component: {fileID: 5450699120387487569}
   - component: {fileID: 7856147270128774584}
   m_Layer: 0
   m_Name: SlashFX
-  m_TagString: Untagged
+  m_TagString: PlayerAttk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -424,11 +436,48 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.3535534, y: -0.61237246, z: -0.61237246, w: -0.3535534}
   m_LocalPosition: {x: 0.0009994507, y: 0, z: 0.018001556}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7367024613785331975}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -240}
+--- !u!114 &320123719098764705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8035002759888529059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff49f282b8ec17d4d8717e489ec91e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashFX: {fileID: 5450699120387487569}
+  attkCol: {fileID: 832482793996661607}
+  cooldownTime: 0.27
+  colliderDisableTime: 0.3
+--- !u!135 &832482793996661607
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8035002759888529059}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.87
+  m_Center: {x: 0.0000009536743, y: 0.00000047683716, z: 0}
 --- !u!198 &5450699120387487569
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -444,7 +493,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -5299,7 +5348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1120080903529826765, guid: d6fe95e676a6003488c3952b420c6aa2, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Scanner
       objectReference: {fileID: 0}
     - target: {fileID: 4002541350830119246, guid: d6fe95e676a6003488c3952b420c6aa2, type: 3}
       propertyPath: m_RootOrder

@@ -8,6 +8,7 @@ TagManager:
   - Scanner
   - PlayerAttk
   - Shield
+  - Colliders
   layers:
   - Default
   - TransparentFX
