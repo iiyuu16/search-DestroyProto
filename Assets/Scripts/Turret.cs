@@ -18,38 +18,38 @@ public class Turret : MonoBehaviour
     public ParticleSystem fireFX;
     public ParticleSystem smokeFX;
 
-    [SerializeField]
-    private float timer = 5f;
-    private float bulletTime;
+    public float fireRate = 0.5f; // Adjust the fire rate as needed
+    private float nextFireTime;
 
     void Start()
     {
         currentHP = maxHP;
+        nextFireTime = 0f;
     }
 
     void Update()
     {
-        ShootAtPlayer();
+        if (Time.time >= nextFireTime)
+        {
+            ShootAtPlayer();
+            nextFireTime = Time.time + 1 / fireRate; // Calculate the next fire time based on the fire rate
+        }
     }
 
     void ShootAtPlayer()
     {
-        bulletTime -= Time.deltaTime;
-        if (bulletTime > 0)
-        {
-            return;
-        }
-
-        bulletTime = timer;
-
         Vector3 directionToPlayer = (player.position - bulletSpawn.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
         transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
 
-        GameObject bulletObj = Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
-        Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
-        bulletRig.velocity = directionToPlayer * bulletSpeed;
-        Destroy(bulletObj, 5f);
+        // Fire multiple bullets
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject bulletObj = Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
+            Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
+            bulletRig.velocity = directionToPlayer * bulletSpeed;
+            Destroy(bulletObj, 5f);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -70,10 +70,9 @@ public class Turret : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "PlayerAttk")
+        if (other.tag == "PlayerAttk")
         {
             TakeDamage(plyr.attkDMG);
         }

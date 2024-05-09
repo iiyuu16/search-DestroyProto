@@ -4,24 +4,20 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement playerMovement;
+
     public float moveSpeed = 5f;
     public float rotationSpeed = 100f;
     public float acceleration = 5f;
     public float deceleration = 10f;
     public float boostSpeed = 10f;
     public float boostCD = 3f;
-    public float boostRegenDelay = 10f; // Time delay for boost regeneration
+    public float boostRegenDelay = 10f;
     private float currentSpeed = 0f;
-    public int maxHP = 3;
+    public int maxHP;
     private int currHP;
 
     public Bullet bullet;
-
-    public ParticleSystem hitFX;
-    public ParticleSystem sparksFX;
-    public ParticleSystem flashFX;
-    public ParticleSystem fireFX;
-    public ParticleSystem smokeFX;
 
     private bool isBraking = false;
     private bool isBoosting = false;
@@ -34,13 +30,31 @@ public class PlayerMovement : MonoBehaviour
 
     public KeyCode BoostKey;
 
+
+
+
+    private void Awake()
+    {
+        if(playerMovement == null)
+        {
+            playerMovement = this;
+        }
+        else
+            Destroy(gameObject);
+    }
+
+
+
+
     private void Start()
     {
         currBoosts = maxBoosts;
         currHP = maxHP;
         UpdateBoostIndicator();
         StartCoroutine(BoostRegeneration());
+        Debug.Log("starting hp:" + currHP);
     }
+
 
     void Update()
     {
@@ -48,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
         HandleRotation();
         ApplyBrake();
         HandleBoost();
+        HandleLife();
+        recoveryTime();
     }
 
     private void HandleLife()
@@ -58,20 +74,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void PLayerHit()
     {
-        if(other.tag == "Bullet")
-        {
-            hitFX.Play();
-            PLayerHit();
-        }
+        currHP -= 1;
+        Debug.Log("starting hp:" + currHP);
+
+        //add screen shake here
+
     }
 
-    private void PLayerHit()
-    {
-        currHP -= bullet.bulletDMG;
-        //add screen shake here
-    }
 
     private IEnumerator recoveryTime()
     {

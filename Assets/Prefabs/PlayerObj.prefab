@@ -324,7 +324,7 @@ Transform:
   m_GameObject: {fileID: 7944236115178837544}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.38, y: 8.5, z: 30.11}
+  m_LocalPosition: {x: 38.32, y: 8.5, z: 27.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -349,9 +349,11 @@ MonoBehaviour:
   rotationSpeed: 180
   acceleration: 3
   deceleration: 6
-  boostSpeed: 8
-  boostCD: 10
-  boostRegenDelay: 10
+  boostSpeed: 12
+  boostCD: 1
+  boostRegenDelay: 5
+  currHP: 15
+  bullet: {fileID: 2085239589516628975, guid: 3358956ab3a906f46b50ed8c6e636c46, type: 3}
   maxBoosts: 3
   boostIndicator:
   - {fileID: 0}
@@ -457,8 +459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slashFX: {fileID: 5450699120387487569}
   attkCol: {fileID: 832482793996661607}
-  cooldownTime: 0.27
-  colliderDisableTime: 0.3
+  cooldownTime: 0.2
+  colliderDisableTime: 0.2
   attkDMG: 1
   Attack: 106
 --- !u!135 &832482793996661607

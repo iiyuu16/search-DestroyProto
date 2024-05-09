@@ -4,8 +4,8 @@ public class PlayerAttack : MonoBehaviour
 {
     public ParticleSystem slashFX;
     public Collider attkCol;
-    public float cooldownTime = 1f;
-    public float colliderDisableTime = 0.5f;
+    public float cooldownTime = .1f;
+    public float colliderDisableTime = .1f;
     private float cooldownTimer;
     public int attkDMG = 1;
     public KeyCode Attack;

@@ -157,7 +157,7 @@ MonoBehaviour:
   player: {fileID: 0}
   bullet: {fileID: 8525128527710475867, guid: 3358956ab3a906f46b50ed8c6e636c46, type: 3}
   bulletSpawn: {fileID: 4272010236581896041}
-  bulletSpeed: 5
+  bulletSpeed: 10
   maxHP: 5
   plyr: {fileID: 0}
   hitFX: {fileID: 1401254217030952265}
@@ -165,7 +165,7 @@ MonoBehaviour:
   flashFX: {fileID: 2886440177161022979}
   fireFX: {fileID: 4234816593727320290}
   smokeFX: {fileID: 8440444469401883584}
-  timer: 1
+  fireRate: 1.5
 --- !u!1001 &5125432072355334014
 PrefabInstance:
   m_ObjectHideFlags: 0
