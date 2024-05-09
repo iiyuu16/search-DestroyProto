@@ -13,6 +13,11 @@ public class Bullet : MonoBehaviour
             Debug.Log("player hit");
             Destroy(gameObject);
         }
+        else if (other.tag == "PlayerAttk")
+        {
+            Debug.Log("bullet destroyed");
+            Destroy(gameObject);
+        }
         else
         {
             StartCoroutine(BulletLifetime());

@@ -7,6 +7,8 @@ public class PlayerAttack : MonoBehaviour
     public float cooldownTime = 1f;
     public float colliderDisableTime = 0.5f;
     private float cooldownTimer;
+    public int attkDMG = 1;
+    public KeyCode Attack;
 
     void Start()
     {
@@ -19,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
     {
         cooldownTimer -= Time.deltaTime;
 
-        if (cooldownTimer <= 0f && Input.GetKeyDown(KeyCode.K))
+        if (cooldownTimer <= 0f && Input.GetKey(Attack))
         {
             slashFX.Play();
             attkCol.enabled = true;

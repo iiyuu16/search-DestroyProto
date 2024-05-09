@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public Sprite boostIcon;
     public Sprite nullIcon;
 
+    public KeyCode BoostKey;
+
     private void Start()
     {
         currBoosts = maxBoosts;
@@ -81,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleBoost()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isBoosting && currBoosts > 0)
+        if (Input.GetKeyDown(BoostKey) && !isBoosting && currBoosts > 0)
         {
             StartCoroutine(ActivateBoost());
         }

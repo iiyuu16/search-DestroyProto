@@ -9,6 +9,8 @@ TagManager:
   - PlayerAttk
   - Shield
   - Colliders
+  - Turret
+  - Bullet
   layers:
   - Default
   - TransparentFX

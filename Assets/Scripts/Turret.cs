@@ -8,10 +8,18 @@ public class Turret : MonoBehaviour
     public GameObject bullet;
     public Transform bulletSpawn;
     public float bulletSpeed;
+    public int maxHP = 5;
+    private int currentHP;
+    public PlayerAttack plyr;
 
     [SerializeField]
     private float timer = 5f;
     private float bulletTime;
+
+    void Start()
+    {
+        currentHP = maxHP;
+    }
 
     void Update()
     {
@@ -28,18 +36,35 @@ public class Turret : MonoBehaviour
 
         bulletTime = timer;
 
-        // Calculate the direction from the turret to the player
         Vector3 directionToPlayer = (player.position - bulletSpawn.position).normalized;
-
-        // Rotate the turret to face the player
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
         transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
 
-        // Instantiate and shoot the bullet in the direction of the player
         GameObject bulletObj = Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
         bulletRig.velocity = directionToPlayer * bulletSpeed;
         Destroy(bulletObj, 5f);
     }
 
+    public void TakeDamage(int damage)
+    {
+        currentHP -= damage;
+
+        Debug.Log("Turret HP: " + currentHP);
+
+        if (currentHP <= 0)
+        {
+            Debug.Log("Turret destroyed!"); 
+            Destroy(gameObject);
+        }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "PlayerAttk")
+        {
+            TakeDamage(plyr.attkDMG);
+        }
+    }
 }

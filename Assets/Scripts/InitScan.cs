@@ -20,6 +20,8 @@ public class InitScan : MonoBehaviour
 
     private Coroutine revertMaterialCoroutine; // Coroutine reference for reverting material
 
+    public KeyCode Scan;
+
     void Start()
     {
         instance = this;
@@ -41,7 +43,7 @@ public class InitScan : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(Scan))
         {
             scanner.Play();
             StartExpanding();
