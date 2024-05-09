@@ -38,19 +38,23 @@ public class Turret : MonoBehaviour
 
     void ShootAtPlayer()
     {
-        Vector3 directionToPlayer = (player.position - bulletSpawn.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-        transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
-
-        // Fire multiple bullets
-        for (int i = 0; i < 3; i++)
+        // Check if it's time to fire
+        if (Time.time >= nextFireTime)
         {
+            Vector3 directionToPlayer = (player.position - bulletSpawn.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
+            transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
+
             GameObject bulletObj = Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
             Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
             bulletRig.velocity = directionToPlayer * bulletSpeed;
             Destroy(bulletObj, 5f);
+
+            // Update the next fire time based on the fire rate
+            nextFireTime = Time.time + 1 / fireRate;
         }
     }
+
 
     public void TakeDamage(int damage)
     {

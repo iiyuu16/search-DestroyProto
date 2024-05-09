@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public static PlayerMovement playerMovement;
+    public static PlayerMovement instance;
 
     public float moveSpeed = 5f;
     public float rotationSpeed = 100f;
@@ -30,21 +30,15 @@ public class PlayerMovement : MonoBehaviour
 
     public KeyCode BoostKey;
 
-
-
-
     private void Awake()
     {
-        if(playerMovement == null)
+        if(instance == null)
         {
-            playerMovement = this;
+            instance = this;
         }
         else
             Destroy(gameObject);
     }
-
-
-
 
     private void Start()
     {
@@ -77,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     public void PLayerHit()
     {
         currHP -= 1;
-        Debug.Log("starting hp:" + currHP);
+        Debug.Log("hp:" + currHP);
 
         //add screen shake here
 
