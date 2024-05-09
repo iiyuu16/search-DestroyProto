@@ -7,6 +7,11 @@ public class Enemy : MonoBehaviour
     public GameObject shieldObject;
     public int shieldHealth = 10;
     public GameObject vulnerableObject;
+    public ParticleSystem hitFX;
+    public ParticleSystem sparksFX;
+    public ParticleSystem flashFX;
+    public ParticleSystem fireFX;
+    public ParticleSystem smokeFX;
 
     public void Start()
     {
@@ -43,14 +48,20 @@ public class Enemy : MonoBehaviour
             if (shieldHealth > 0)
             {
                 shieldHealth--;
+                hitFX.Play();
                 if (shieldHealth <= 0)
                 {
                     Destroy(shieldObject);
+                    hitFX.Play();
                     vulnerableObject.SetActive(true);
                 }
             }
             else
             {
+                sparksFX.Play();
+                smokeFX.Play();
+                flashFX.Play();
+                fireFX.Play();
                 Destroy(vulnerableObject);
             }
         }

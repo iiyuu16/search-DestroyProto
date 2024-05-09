@@ -5,20 +5,20 @@ using UnityEngine;
 public class InitScan : MonoBehaviour
 {
     public static InitScan instance;
-    public event Action<float> OnRevealDurationOver; // Event for when the reveal duration is over
+    public event Action<float> OnRevealDurationOver;
     public ParticleSystem scanner;
-    public float scanDuration = 3f; // Duration of the scanning effect
-    public float revealDuration = 3f; // Duration for which the target stays revealed
+    public float scanDuration = 3f;
+    public float revealDuration = 3f;
     public float maxSize = 30;
     public float growthRate = 1f;
     public float startingSize = 0.1f;
-    public Material newMaterial; // New material to be applied
+    public Material newMaterial;
 
     private SphereCollider sphereCollider;
     private bool isExpanding = false;
-    private Material originalMaterial; // Original material of the target
+    private Material originalMaterial;
 
-    private Coroutine revertMaterialCoroutine; // Coroutine reference for reverting material
+    private Coroutine revertMaterialCoroutine;
 
     public KeyCode Scan;
 
@@ -29,7 +29,6 @@ public class InitScan : MonoBehaviour
         sphereCollider.isTrigger = true;
         sphereCollider.radius = startingSize;
 
-        // Store the original material of the target
         Renderer targetRenderer = GetComponent<Renderer>();
         if (targetRenderer != null)
         {
@@ -79,21 +78,17 @@ public class InitScan : MonoBehaviour
         {
             Debug.Log("Target detected in range");
 
-            // Apply the new material to the target
             Renderer targetRenderer = other.GetComponent<Renderer>();
             if (targetRenderer != null && newMaterial != null)
             {
-                // Store the original material before applying the new material
                 Material originalMaterial = targetRenderer.material;
                 targetRenderer.material = newMaterial;
 
-                // Cancel the previous coroutine if running
                 if (revertMaterialCoroutine != null)
                 {
                     StopCoroutine(revertMaterialCoroutine);
                 }
 
-                // Start a new coroutine to revert material after the reveal duration
                 revertMaterialCoroutine = StartCoroutine(RevertMaterialAfterDelay(targetRenderer, originalMaterial));
             }
             else
@@ -107,11 +102,10 @@ public class InitScan : MonoBehaviour
     {
         yield return new WaitForSeconds(revealDuration);
 
-        // Revert the material to the original after the reveal duration
         if (targetRenderer != null)
         {
             targetRenderer.material = originalMaterial;
-            OnRevealDurationOver?.Invoke(revealDuration); // Invoke the event
+            OnRevealDurationOver?.Invoke(revealDuration);
         }
     }
 }

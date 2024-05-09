@@ -12,6 +12,12 @@ public class Turret : MonoBehaviour
     private int currentHP;
     public PlayerAttack plyr;
 
+    public ParticleSystem hitFX;
+    public ParticleSystem sparksFX;
+    public ParticleSystem flashFX;
+    public ParticleSystem fireFX;
+    public ParticleSystem smokeFX;
+
     [SerializeField]
     private float timer = 5f;
     private float bulletTime;
@@ -49,12 +55,17 @@ public class Turret : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHP -= damage;
+        hitFX.Play();
 
         Debug.Log("Turret HP: " + currentHP);
 
         if (currentHP <= 0)
         {
-            Debug.Log("Turret destroyed!"); 
+            Debug.Log("Turret destroyed!");
+            sparksFX.Play();
+            smokeFX.Play();
+            flashFX.Play();
+            fireFX.Play();
             Destroy(gameObject);
         }
     }

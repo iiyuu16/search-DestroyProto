@@ -12,6 +12,16 @@ public class PlayerMovement : MonoBehaviour
     public float boostCD = 3f;
     public float boostRegenDelay = 10f; // Time delay for boost regeneration
     private float currentSpeed = 0f;
+    public int maxHP = 3;
+    private int currHP;
+
+    public Bullet bullet;
+
+    public ParticleSystem hitFX;
+    public ParticleSystem sparksFX;
+    public ParticleSystem flashFX;
+    public ParticleSystem fireFX;
+    public ParticleSystem smokeFX;
 
     private bool isBraking = false;
     private bool isBoosting = false;
@@ -27,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         currBoosts = maxBoosts;
+        currHP = maxHP;
         UpdateBoostIndicator();
         StartCoroutine(BoostRegeneration());
     }
@@ -37,6 +48,35 @@ public class PlayerMovement : MonoBehaviour
         HandleRotation();
         ApplyBrake();
         HandleBoost();
+    }
+
+    private void HandleLife()
+    {
+        if(currHP <= 0)
+        {
+            //apply stunned state - player is invincible for 3s then hp is back to 3 again
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Bullet")
+        {
+            hitFX.Play();
+            PLayerHit();
+        }
+    }
+
+    private void PLayerHit()
+    {
+        currHP -= bullet.bulletDMG;
+        //add screen shake here
+    }
+
+    private IEnumerator recoveryTime()
+    {
+        yield return new WaitForSeconds(5);
+        //make player return to normal state
     }
 
     private void HandleMovement()

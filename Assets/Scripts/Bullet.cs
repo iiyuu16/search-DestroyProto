@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float bulletLife = 5f;
+    public int bulletDMG = 1;
 
     private void OnTriggerEnter(Collider other)
     {
