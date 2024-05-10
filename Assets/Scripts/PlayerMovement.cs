@@ -72,8 +72,7 @@ public class PlayerMovement : MonoBehaviour
     {
         currHP -= 1;
         Debug.Log("hp:" + currHP);
-
-        //add screen shake here
+        CamShake.instance.ShakeCamera();
 
     }
 
