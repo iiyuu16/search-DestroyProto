@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isBraking = false;
     private bool isBoosting = false;
+    private bool isStunned = false;
+    private Coroutine recoveryCoroutine;
 
     public int maxBoosts;
     private int currBoosts;
@@ -32,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -52,19 +54,42 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        HandleMovement();
-        HandleRotation();
-        ApplyBrake();
-        HandleBoost();
+        if (!isStunned)
+        {
+            HandleMovement();
+            HandleRotation();
+            ApplyBrake();
+            HandleBoost();
+        }
         HandleLife();
-        recoveryTime();
+        RecoveryTime();
     }
 
     private void HandleLife()
     {
-        if(currHP <= 0)
+        if (currHP <= 0 && !isStunned)
         {
-            //apply stunned state - player is invincible for 3s then hp is back to 3 again
+            isStunned = true;
+            Debug.Log("Stunned state activated");
+
+            currentSpeed = 0f;
+
+            recoveryCoroutine = StartCoroutine(RecoveryTime());
+        }
+    }
+
+    private IEnumerator RecoveryTime()
+    {
+        yield return new WaitForSeconds(5f);
+
+        isStunned = false;
+        Debug.Log("Player recovered");
+        currHP = maxHP;
+        UpdateBoostIndicator();
+
+        if (recoveryCoroutine != null)
+        {
+            StopCoroutine(recoveryCoroutine);
         }
     }
 
@@ -74,13 +99,6 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("hp:" + currHP);
         CamShake.instance.ShakeCamera();
 
-    }
-
-
-    private IEnumerator recoveryTime()
-    {
-        yield return new WaitForSeconds(5);
-        //make player return to normal state
     }
 
     private void HandleMovement()
