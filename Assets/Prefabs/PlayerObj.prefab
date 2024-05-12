@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad69fba142966b4c97ff6bb1b805448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stunEffects: {fileID: 0}
   moveSpeed: 8
   rotationSpeed: 180
   acceleration: 3
@@ -355,6 +356,7 @@ MonoBehaviour:
   boostRegenDelay: 5
   maxHP: 15
   bullet: {fileID: 2085239589516628975, guid: 3358956ab3a906f46b50ed8c6e636c46, type: 3}
+  isStunned: 0
   maxBoosts: 3
   boostIndicator:
   - {fileID: 0}
@@ -362,6 +364,7 @@ MonoBehaviour:
   - {fileID: 0}
   boostIcon: {fileID: 7482667652216324306, guid: e1c79a63f73ad6c46b117273230eabd1, type: 3}
   nullIcon: {fileID: 21300000, guid: 0157dd2bc2296d44ab7af5ff64b2de5e, type: 3}
+  sliderHP: {fileID: 0}
   BoostKey: 304
 --- !u!65 &9004435441446529444
 BoxCollider:
@@ -464,6 +467,7 @@ MonoBehaviour:
   colliderDisableTime: 0.2
   attkDMG: 1
   Attack: 106
+  playerMovement: {fileID: 5862614335967002488}
 --- !u!135 &832482793996661607
 SphereCollider:
   m_ObjectHideFlags: 0

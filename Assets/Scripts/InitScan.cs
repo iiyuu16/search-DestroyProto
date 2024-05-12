@@ -17,6 +17,7 @@ public class InitScan : MonoBehaviour
     private SphereCollider sphereCollider;
     private bool isExpanding = false;
     private Material originalMaterial;
+    private PlayerMovement playerMovement; // Reference to PlayerMovement script
 
     private Coroutine revertMaterialCoroutine;
 
@@ -38,11 +39,15 @@ public class InitScan : MonoBehaviour
         {
             Debug.LogWarning("Target does not have a Renderer component.");
         }
+
+        // Get reference to PlayerMovement script
+        playerMovement = FindObjectOfType<PlayerMovement>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(Scan))
+        // Check if player is not stunned and scan input is pressed
+        if (!playerMovement.isStunned && Input.GetKeyDown(Scan))
         {
             scanner.Play();
             StartExpanding();

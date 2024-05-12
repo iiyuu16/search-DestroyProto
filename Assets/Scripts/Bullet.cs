@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
             sparksFX.Play();
             smokeFX.Play();
             fireFX.Play();
-            PlayerMovement.instance.PLayerHit();
+            PlayerMovement.instance.PlayerHit();
             col.enabled = false;
             bulletSkin.enabled = false;
             StartCoroutine(DelayDestroy());

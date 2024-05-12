@@ -10,18 +10,26 @@ public class PlayerAttack : MonoBehaviour
     public int attkDMG = 1;
     public KeyCode Attack;
 
+    public PlayerMovement playerMovement; // Reference to PlayerMovement script
+
     void Start()
     {
         attkCol = GetComponent<Collider>();
         attkCol.enabled = false;
         cooldownTimer = 0f;
+
+        if (playerMovement == null)
+        {
+            Debug.LogError("PlayerMovement reference not set!");
+        }
     }
 
     void Update()
     {
         cooldownTimer -= Time.deltaTime;
 
-        if (cooldownTimer <= 0f && Input.GetKey(Attack))
+        // Check if the player is not stunned and the attack input is pressed
+        if (!playerMovement.isStunned && cooldownTimer <= 0f && Input.GetKey(Attack))
         {
             slashFX.Play();
             attkCol.enabled = true;

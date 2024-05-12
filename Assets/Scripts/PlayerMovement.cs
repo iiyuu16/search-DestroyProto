@@ -1,10 +1,11 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement instance;
+    public StunEffects stunEffects;
 
     public float moveSpeed = 5f;
     public float rotationSpeed = 100f;
@@ -22,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isBraking = false;
     private bool isBoosting = false;
-    private bool isStunned = false;
+    public bool isStunned = false;
     private Coroutine recoveryCoroutine;
 
     public int maxBoosts;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public Image[] boostIndicator;
     public Sprite boostIcon;
     public Sprite nullIcon;
+    public Slider sliderHP;
 
     public KeyCode BoostKey;
 
@@ -49,9 +51,17 @@ public class PlayerMovement : MonoBehaviour
         currHP = maxHP;
         UpdateBoostIndicator();
         StartCoroutine(BoostRegeneration());
+        stunEffects.DisableStunEffects();
         Debug.Log("starting hp:" + currHP);
-    }
 
+        if (sliderHP != null)
+        {
+            sliderHP.minValue = 0;
+            sliderHP.maxValue = maxHP;
+            sliderHP.value = maxHP;
+            sliderHP.onValueChanged.AddListener(OnHealthChanged);
+        }
+    }
 
     void Update()
     {
@@ -63,7 +73,6 @@ public class PlayerMovement : MonoBehaviour
             HandleBoost();
         }
         HandleLife();
-        RecoveryState();
     }
 
     private void HandleLife()
@@ -82,29 +91,43 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator RecoveryState()
     {
         GetComponent<Collider>().enabled = false;
+        stunEffects.EnableStunEffects();
+        stunEffects.ShowRecoveryTime(recoveryTime);
 
-        yield return new WaitForSeconds(recoveryTime);
+        float timer = recoveryTime;
+        while (timer > 0)
+        {
+            if (sliderHP != null)
+            {
+                sliderHP.value = Mathf.RoundToInt(timer);
+            }
+            yield return new WaitForSeconds(1f);
+            timer -= 1f;
+        }
 
         GetComponent<Collider>().enabled = true;
+        stunEffects.DisableStunEffects();
 
         isStunned = false;
         Debug.Log("Player recovered");
         currHP = maxHP;
         UpdateBoostIndicator();
-
-        if (recoveryCoroutine != null)
-        {
-            StopCoroutine(recoveryCoroutine);
-        }
     }
 
+    public void OnHealthChanged(float value)
+    {
+        currHP = Mathf.RoundToInt(value);
+    }
 
-    public void PLayerHit()
+    public void PlayerHit()
     {
         currHP -= 1;
         Debug.Log("hp:" + currHP);
         CamShake.instance.ShakeCamera();
-
+        if (sliderHP != null)
+        {
+            sliderHP.value = currHP;
+        }
     }
 
     private void HandleMovement()
