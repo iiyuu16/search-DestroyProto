@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   revealDuration: 3
   shieldObject: {fileID: 1103636256162949029}
-  shieldHealth: 10
+  shieldHealth: 20
   vulnerableObject: {fileID: 5865037609495063658}
   hitFX: {fileID: 6682909645023867645}
   sparksFX: {fileID: 2366339607234822715}

@@ -158,7 +158,7 @@ MonoBehaviour:
   bullet: {fileID: 8525128527710475867, guid: 3358956ab3a906f46b50ed8c6e636c46, type: 3}
   bulletSpawn: {fileID: 4272010236581896041}
   bulletSpeed: 10
-  maxHP: 5
+  maxHP: 12
   plyr: {fileID: 0}
   hitFX: {fileID: 1401254217030952265}
   sparksFX: {fileID: 8587548126548184485}

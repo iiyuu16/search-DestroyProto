@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float deceleration = 10f;
     public float boostSpeed = 10f;
     public float boostCD = 3f;
+    public float recoveryTime = 5f;
     public float boostRegenDelay = 10f;
     private float currentSpeed = 0f;
     public int maxHP;
@@ -62,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             HandleBoost();
         }
         HandleLife();
-        RecoveryTime();
+        RecoveryState();
     }
 
     private void HandleLife()
@@ -74,13 +75,17 @@ public class PlayerMovement : MonoBehaviour
 
             currentSpeed = 0f;
 
-            recoveryCoroutine = StartCoroutine(RecoveryTime());
+            recoveryCoroutine = StartCoroutine(RecoveryState());
         }
     }
 
-    private IEnumerator RecoveryTime()
+    private IEnumerator RecoveryState()
     {
-        yield return new WaitForSeconds(5f);
+        GetComponent<Collider>().enabled = false;
+
+        yield return new WaitForSeconds(recoveryTime);
+
+        GetComponent<Collider>().enabled = true;
 
         isStunned = false;
         Debug.Log("Player recovered");
@@ -92,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
             StopCoroutine(recoveryCoroutine);
         }
     }
+
 
     public void PLayerHit()
     {

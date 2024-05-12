@@ -351,8 +351,9 @@ MonoBehaviour:
   deceleration: 6
   boostSpeed: 12
   boostCD: 1
+  recoveryTime: 5
   boostRegenDelay: 5
-  currHP: 15
+  maxHP: 15
   bullet: {fileID: 2085239589516628975, guid: 3358956ab3a906f46b50ed8c6e636c46, type: 3}
   maxBoosts: 3
   boostIndicator:
