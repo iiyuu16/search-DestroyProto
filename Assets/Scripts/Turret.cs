@@ -11,6 +11,7 @@ public class Turret : MonoBehaviour
     public int maxHP = 5;
     private int currentHP;
     public PlayerAttack plyr;
+    public Renderer turretSkin;
 
     public ParticleSystem hitFX;
     public ParticleSystem sparksFX;
@@ -18,13 +19,14 @@ public class Turret : MonoBehaviour
     public ParticleSystem fireFX;
     public ParticleSystem smokeFX;
 
-    public float fireRate = 0.5f; // Adjust the fire rate as needed
+    public float fireRate = 0.5f;
     private float nextFireTime;
 
     void Start()
     {
         currentHP = maxHP;
         nextFireTime = 0f;
+        turretSkin.enabled = true;
     }
 
     void Update()
@@ -32,13 +34,12 @@ public class Turret : MonoBehaviour
         if (Time.time >= nextFireTime)
         {
             ShootAtPlayer();
-            nextFireTime = Time.time + 1 / fireRate; // Calculate the next fire time based on the fire rate
+            nextFireTime = Time.time + 1 / fireRate;
         }
     }
 
     void ShootAtPlayer()
     {
-        // Check if it's time to fire
         if (Time.time >= nextFireTime)
         {
             Vector3 directionToPlayer = (player.position - bulletSpawn.position).normalized;
@@ -50,7 +51,6 @@ public class Turret : MonoBehaviour
             bulletRig.velocity = directionToPlayer * bulletSpeed;
             Destroy(bulletObj, 5f);
 
-            // Update the next fire time based on the fire rate
             nextFireTime = Time.time + 1 / fireRate;
         }
     }
@@ -70,7 +70,8 @@ public class Turret : MonoBehaviour
             smokeFX.Play();
             flashFX.Play();
             fireFX.Play();
-            Destroy(gameObject);
+            turretSkin.enabled = false;
+            StartCoroutine(DelayDestroy());
         }
     }
 
@@ -80,5 +81,11 @@ public class Turret : MonoBehaviour
         {
             TakeDamage(plyr.attkDMG);
         }
+    }
+
+    private IEnumerator DelayDestroy()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 }
