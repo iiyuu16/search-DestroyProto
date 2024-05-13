@@ -8,10 +8,8 @@ public class StunEffects : MonoBehaviour
 {
     public static StunEffects instance;
 
-    public GameObject stunUI; // Reference to the UI object for stun effect
-    public TextMeshProUGUI countdownText; // Reference to the TextMeshPro object for countdown
-
-    public RenderPipelineAsset blitRenderer; // Reference to the custom Blit renderer feature
+    public GameObject stunUI;
+    public TextMeshProUGUI countdownText;
 
     private void Awake()
     {
@@ -25,39 +23,11 @@ public class StunEffects : MonoBehaviour
             return;
         }
 
-        Initialize();
-    }
-
-    private void Initialize()
-    {
-        // Try to find the Blit renderer feature in the renderer features list of the URP asset
-        UniversalRenderPipelineAsset urpAsset = GraphicsSettings.renderPipelineAsset as UniversalRenderPipelineAsset;
-        if (urpAsset != null)
-        {
-            foreach (var rendererFeature in urpAsset.rendererFeatures)
-            {
-                if (rendererFeature is Blit && rendererFeature.name == "SDurp Renderer")
-                {
-                    blitRenderer = rendererFeature as Blit;
-                    break;
-                }
-            }
-        }
-
-        if (blitRenderer == null)
-        {
-            Debug.LogError("Blit renderer feature 'SDurp Renderer' is not found in the URP asset!");
-        }
+        VolumeManager.instance.Initialize();
     }
 
     public void EnableStunEffects()
     {
-        // Enable the Blit renderer feature
-        if (blitRenderer != null)
-        {
-            blitRenderer.settings.Event = RenderPassEvent.AfterRendering; // Set the render pass event
-        }
-
         if (stunUI != null)
         {
             stunUI.SetActive(true);
@@ -67,16 +37,12 @@ public class StunEffects : MonoBehaviour
         {
             countdownText.gameObject.SetActive(true);
         }
+
+        VolumeManager.instance.EnableVignette();
     }
 
     public void DisableStunEffects()
     {
-        // Disable the Blit renderer feature
-        if (blitRenderer != null)
-        {
-            blitRenderer.settings.Event = RenderPassEvent.BeforeRendering; // Set the render pass event
-        }
-
         if (stunUI != null)
         {
             stunUI.SetActive(false);
@@ -86,6 +52,8 @@ public class StunEffects : MonoBehaviour
         {
             countdownText.gameObject.SetActive(false);
         }
+
+        VolumeManager.instance.DisableVignette();
     }
 
     public void ShowRecoveryTime(float recoveryTime)

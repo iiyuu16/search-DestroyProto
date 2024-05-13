@@ -13,9 +13,13 @@ public class Enemy : MonoBehaviour
     public ParticleSystem fireFX;
     public ParticleSystem smokeFX;
 
-    public void Start()
+    private Transform parentTransform; // Reference to the parent's transform
+
+    private void Start()
     {
         shieldObject.SetActive(false);
+        // Get the parent's transform
+        parentTransform = transform.parent;
     }
 
     public void RevealEnemy()
@@ -63,6 +67,11 @@ public class Enemy : MonoBehaviour
                 flashFX.Play();
                 fireFX.Play();
                 Destroy(vulnerableObject);
+                // Check if the parent exists and destroy it if it does
+                if (parentTransform != null)
+                {
+                    Destroy(parentTransform.gameObject);
+                }
             }
         }
     }
