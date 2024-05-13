@@ -8,11 +8,10 @@ public class StunEffects : MonoBehaviour
 {
     public static StunEffects instance;
 
-    public VolumeProfile volumeProfile; // Reference to the global volume profile
     public GameObject stunUI; // Reference to the UI object for stun effect
     public TextMeshProUGUI countdownText; // Reference to the TextMeshPro object for countdown
 
-    private Vignette vignette; // Reference to the vignette effect
+    public RenderPipelineAsset blitRenderer; // Reference to the custom Blit renderer feature
 
     private void Awake()
     {
@@ -31,20 +30,32 @@ public class StunEffects : MonoBehaviour
 
     private void Initialize()
     {
-        if (volumeProfile == null)
+        // Try to find the Blit renderer feature in the renderer features list of the URP asset
+        UniversalRenderPipelineAsset urpAsset = GraphicsSettings.renderPipelineAsset as UniversalRenderPipelineAsset;
+        if (urpAsset != null)
         {
-            Debug.LogError("Volume Profile is not assigned to StunEffectsManager!");
-            return;
+            foreach (var rendererFeature in urpAsset.rendererFeatures)
+            {
+                if (rendererFeature is Blit && rendererFeature.name == "SDurp Renderer")
+                {
+                    blitRenderer = rendererFeature as Blit;
+                    break;
+                }
+            }
         }
 
-        volumeProfile.TryGet(out vignette); // Try to get the vignette effect from the volume profile
+        if (blitRenderer == null)
+        {
+            Debug.LogError("Blit renderer feature 'SDurp Renderer' is not found in the URP asset!");
+        }
     }
 
     public void EnableStunEffects()
     {
-        if (vignette != null)
+        // Enable the Blit renderer feature
+        if (blitRenderer != null)
         {
-            vignette.active = true;
+            blitRenderer.settings.Event = RenderPassEvent.AfterRendering; // Set the render pass event
         }
 
         if (stunUI != null)
@@ -60,9 +71,10 @@ public class StunEffects : MonoBehaviour
 
     public void DisableStunEffects()
     {
-        if (vignette != null)
+        // Disable the Blit renderer feature
+        if (blitRenderer != null)
         {
-            vignette.active = false;
+            blitRenderer.settings.Event = RenderPassEvent.BeforeRendering; // Set the render pass event
         }
 
         if (stunUI != null)
