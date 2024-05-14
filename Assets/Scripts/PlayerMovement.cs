@@ -20,8 +20,6 @@ public class PlayerMovement : MonoBehaviour
     public int maxHP;
     private int currHP;
 
-    public Bullet bullet;
-
     private bool isBraking = false;
     private bool isBoosting = false;
     public bool isStunned = false;

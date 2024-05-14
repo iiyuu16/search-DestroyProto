@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8763924548522060527}
   - component: {fileID: 2791938642567101861}
   - component: {fileID: 3715233664351593810}
-  - component: {fileID: 2085239589516628975}
+  - component: {fileID: 561608175386336712}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: NonDestroyableBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4b1bc93bc0191db48aa3e0432425ff21, type: 2}
+  - {fileID: 2100000, guid: a7826c9cf771e8d4a9a408d67051d182, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,7 +136,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2085239589516628975
+--- !u!114 &561608175386336712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8525128527710475867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68fe25c126c40bf4f84f75fbb23126ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 72299c65e1352084a8fcc8c77b74000d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletLife: 5
