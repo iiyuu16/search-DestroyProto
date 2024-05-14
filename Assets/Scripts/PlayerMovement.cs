@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement instance;
     public StunEffects stunEffects;
+    public ParticleSystem playerTrail;
 
     public float moveSpeed = 5f;
     public float rotationSpeed = 100f;
@@ -186,10 +187,12 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed += boostSpeed;
         currBoosts--;
         UpdateBoostIndicator();
+        playerTrail.Play();
 
         yield return new WaitForSeconds(boostCD);
 
         isBoosting = false;
+        playerTrail.Stop();
         currentSpeed -= boostSpeed;
     }
 

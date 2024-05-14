@@ -31,7 +31,7 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-        if (Time.time >= nextFireTime)
+        if (Time.time >= nextFireTime && !PlayerMovement.instance.isStunned) 
         {
             ShootAtPlayer();
             nextFireTime = Time.time + 1 / fireRate;
