@@ -1493,7 +1493,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734721154}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38358122, y: 0.000000015890215, z: -0.0000000066000445, w: 0.92350715}
+  m_LocalRotation: {x: 0.38358122, y: -0.000000015890215, z: 0.0000000066000445, w: 0.92350715}
   m_LocalPosition: {x: 38.32, y: 18.5, z: 14.879999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2712,6 +2712,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1758345737}
+  - component: {fileID: 1758345738}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -2741,6 +2742,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1066, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1758345738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758345736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46902e5dfa6f7dc4bb57e9cdbe6d13d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hudRectTransform: {fileID: 1758345737}
+  swayAmount: 10
+  maxSwayAmount: 20
 --- !u!1 &1874488695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2750,8 +2766,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1874488697}
-  - component: {fileID: 1874488696}
   - component: {fileID: 1874488698}
+  - component: {fileID: 1874488696}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -2806,7 +2822,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874488695}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38358122, y: 0.000000015890215, z: -0.0000000066000445, w: 0.92350715}
+  m_LocalRotation: {x: 0.38358122, y: -0.000000015890215, z: 0.0000000066000445, w: 0.92350715}
   m_LocalPosition: {x: 38.32, y: 18.5, z: 14.879999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
