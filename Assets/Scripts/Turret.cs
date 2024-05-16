@@ -1,11 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
     public Transform player;
-    public GameObject dBulletPrefab; // Destroyable bullet prefab
-    public GameObject ndBulletPrefab; // Non-destroyable bullet prefab
+    public List<GameObject> bulletPrefabs; // List of bullet prefabs
     public Transform bulletSpawn;
     public float bulletSpeed;
     public int maxHP = 5;
@@ -21,7 +21,7 @@ public class Turret : MonoBehaviour
 
     public float fireRate = 0.5f;
     private float nextFireTime;
-    private bool fireDestroyableBullet = true; // Track which bullet type to fire next
+    private int bulletIndex = 0; // Index to keep track of the current bullet type to fire
 
     void Start()
     {
@@ -45,13 +45,13 @@ public class Turret : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
         transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
 
-        // Alternate between destroyable and non-destroyable bullets
-        GameObject bulletPrefab = fireDestroyableBullet ? dBulletPrefab : ndBulletPrefab;
+        GameObject bulletPrefab = bulletPrefabs[bulletIndex];
         GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
         bulletRig.velocity = directionToPlayer * bulletSpeed;
 
-        fireDestroyableBullet = !fireDestroyableBullet; // Toggle bullet type for next shot
+        // Move to the next bullet type in the list, wrapping around if necessary
+        bulletIndex = (bulletIndex + 1) % bulletPrefabs.Count;
 
         Destroy(bulletObj, 5f);
     }
