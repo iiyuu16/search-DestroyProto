@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public Slider sliderHP;
 
     public KeyCode BoostKey;
+    public soundSource sfx;
 
     private void Awake()
     {
@@ -80,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isStunned = true;
             Debug.Log("Stunned state activated");
-
+            sfx.stunSFX(); // Start looping stun sound
             currentSpeed = 0f;
 
             recoveryCoroutine = StartCoroutine(RecoveryState());
@@ -106,7 +107,8 @@ public class PlayerMovement : MonoBehaviour
 
         GetComponent<Collider>().enabled = true;
         stunEffects.DisableStunEffects();
-
+        sfx.stopStunSFX(); // Stop looping stun sound
+        sfx.recoverSFX(); // Play recover sound
         isStunned = false;
         Debug.Log("Player recovered");
         currHP = maxHP;
@@ -121,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
     public void PlayerHit()
     {
         currHP -= 1;
+        sfx.hurtSFX();
         Debug.Log("hp:" + currHP);
         CamShake.instance.ShakeCamera();
         if (sliderHP != null)
@@ -182,6 +185,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator ActivateBoost()
     {
         isBoosting = true;
+        sfx.boostSFX();
         currentSpeed += boostSpeed;
         currBoosts--;
         UpdateBoostIndicator();

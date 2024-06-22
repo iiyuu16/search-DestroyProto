@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public KeyCode Attack;
 
     public PlayerMovement playerMovement; // Reference to PlayerMovement script
+    public soundSource sfx;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class PlayerAttack : MonoBehaviour
         if (!playerMovement.isStunned && cooldownTimer <= 0f && Input.GetKey(Attack))
         {
             slashFX.Play();
+            sfx.slashSFX();
             attkCol.enabled = true;
 
             Invoke("DisableCollider", colliderDisableTime);

@@ -22,6 +22,7 @@ public class InitScan : MonoBehaviour
     private Coroutine revertMaterialCoroutine;
 
     public KeyCode Scan;
+    public soundSource sfx;
 
     void Start()
     {
@@ -50,6 +51,7 @@ public class InitScan : MonoBehaviour
         if (!playerMovement.isStunned && Input.GetKeyDown(Scan))
         {
             scanner.Play();
+            sfx.scanSFX();
             StartExpanding();
         }
 

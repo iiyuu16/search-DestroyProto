@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
 
     private Transform parentTransform; // Reference to the parent's transform
 
+    public soundSource sfx;
+
     private void Start()
     {
         shieldObject.SetActive(false);
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour
     public void RevealEnemy()
     {
         isRevealed = true;
+        sfx.revealSFX();
         shieldObject.SetActive(true);
         Invoke("ResetRevealState", revealDuration);
     }
@@ -53,10 +56,12 @@ public class Enemy : MonoBehaviour
             {
                 shieldHealth--;
                 hitFX.Play();
+                sfx.hitSFX();
                 if (shieldHealth <= 0)
                 {
                     Destroy(shieldObject);
                     hitFX.Play();
+                    sfx.hitSFX();
                     vulnerableObject.SetActive(true);
                 }
             }
@@ -66,6 +71,7 @@ public class Enemy : MonoBehaviour
                 smokeFX.Play();
                 flashFX.Play();
                 fireFX.Play();
+                sfx.explosionSFX();
                 Destroy(vulnerableObject);
                 // Check if the parent exists and destroy it if it does
                 if (parentTransform != null)

@@ -23,6 +23,8 @@ public class Turret : MonoBehaviour
     private float nextFireTime;
     private int bulletIndex = 0; // Index to keep track of the current bullet type to fire
 
+    public soundSource sfx;
+
     void Start()
     {
         currentHP = maxHP;
@@ -60,7 +62,7 @@ public class Turret : MonoBehaviour
     {
         currentHP -= damage;
         hitFX.Play();
-
+        sfx.hitSFX();
         Debug.Log("Turret HP: " + currentHP);
 
         if (currentHP <= 0)
@@ -70,6 +72,7 @@ public class Turret : MonoBehaviour
             smokeFX.Play();
             flashFX.Play();
             fireFX.Play();
+            sfx.explosionSFX();
             turretSkin.enabled = false;
             StartCoroutine(DelayDestroy());
         }

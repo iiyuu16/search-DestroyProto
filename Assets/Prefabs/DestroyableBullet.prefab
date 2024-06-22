@@ -156,6 +156,7 @@ MonoBehaviour:
   fireFX: {fileID: 7400505939360035016}
   smokeFX: {fileID: 2978159421293515754}
   col: {fileID: 2791938642567101861}
+  sfx: {fileID: 0}
 --- !u!1001 &783379755794453445
 PrefabInstance:
   m_ObjectHideFlags: 0
