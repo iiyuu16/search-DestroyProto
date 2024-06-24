@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5138b926565639046a5be5dc98a027dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7367024613785331975, guid: be4cd87f1c4f1514184f52e7f2b84a8f, type: 3}
+  player: {fileID: 0}
   bulletPrefabs:
   - {fileID: 8525128527710475867, guid: 54c59964574015f489828b0aac4f181d, type: 3}
   - {fileID: 8525128527710475867, guid: 54c59964574015f489828b0aac4f181d, type: 3}
@@ -172,6 +172,7 @@ MonoBehaviour:
   fireFX: {fileID: 384121814925687702}
   smokeFX: {fileID: 5382857114425776308}
   fireRate: 2
+  sfx: {fileID: 0}
 --- !u!1001 &6930977071078455754
 PrefabInstance:
   m_ObjectHideFlags: 0
