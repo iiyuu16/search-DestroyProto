@@ -348,11 +348,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stunEffects: {fileID: 0}
   playerTrail: {fileID: 928839311443309508}
-  moveSpeed: 8
-  rotationSpeed: 180
-  acceleration: 3
-  deceleration: 6
-  boostSpeed: 12
+  moveSpeed: 15
+  rotationSpeed: 200
+  acceleration: 10
+  deceleration: 15
+  boostSpeed: 20
   boostCD: 1
   recoveryTime: 5
   boostRegenDelay: 5
@@ -367,6 +367,7 @@ MonoBehaviour:
   nullIcon: {fileID: 21300000, guid: 0157dd2bc2296d44ab7af5ff64b2de5e, type: 3}
   sliderHP: {fileID: 0}
   BoostKey: 304
+  sfx: {fileID: 0}
 --- !u!65 &9004435441446529444
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -469,6 +470,7 @@ MonoBehaviour:
   attkDMG: 1
   Attack: 106
   playerMovement: {fileID: 5862614335967002488}
+  sfx: {fileID: 0}
 --- !u!135 &832482793996661607
 SphereCollider:
   m_ObjectHideFlags: 0

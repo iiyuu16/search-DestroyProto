@@ -32,6 +32,8 @@ public class SpawnOnEnter : MonoBehaviour
             {
                 obj.SetActive(false);
             }
+
+            Debug.Log("player in");
         }
     }
 
@@ -48,6 +50,8 @@ public class SpawnOnEnter : MonoBehaviour
             {
                 obj.SetActive(true);
             }
+
+            Debug.Log("player out");
         }
     }
 }

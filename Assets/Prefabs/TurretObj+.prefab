@@ -171,7 +171,7 @@ MonoBehaviour:
   flashFX: {fileID: 1702089683184215415}
   fireFX: {fileID: 384121814925687702}
   smokeFX: {fileID: 5382857114425776308}
-  fireRate: 2
+  fireRate: 0.75
   sfx: {fileID: 0}
 --- !u!1001 &6930977071078455754
 PrefabInstance:

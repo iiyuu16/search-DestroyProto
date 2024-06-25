@@ -131,7 +131,7 @@ MonoBehaviour:
   - {fileID: 8525128527710475867, guid: 3358956ab3a906f46b50ed8c6e636c46, type: 3}
   - {fileID: 8525128527710475867, guid: 3358956ab3a906f46b50ed8c6e636c46, type: 3}
   bulletSpawn: {fileID: 7403564005785992448}
-  bulletSpeed: 10
+  bulletSpeed: 8
   maxHP: 12
   plyr: {fileID: 0}
   turretSkin: {fileID: 6949320548710743235}
@@ -140,7 +140,7 @@ MonoBehaviour:
   flashFX: {fileID: 5270763645811612562}
   fireFX: {fileID: 6624274781614507379}
   smokeFX: {fileID: 1443766617851946577}
-  fireRate: 2
+  fireRate: 1
   sfx: {fileID: 0}
 --- !u!1 &1802696650721011308
 GameObject:

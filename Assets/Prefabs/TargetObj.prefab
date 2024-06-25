@@ -247,13 +247,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   revealDuration: 3
   shieldObject: {fileID: 1103636256162949029}
-  shieldHealth: 20
+  shieldHealth: 10
   vulnerableObject: {fileID: 5865037609495063658}
   hitFX: {fileID: 6682909645023867645}
   sparksFX: {fileID: 1928321874452259357}
   flashFX: {fileID: 5035425768834286011}
   fireFX: {fileID: 6281052823683964762}
   smokeFX: {fileID: 1787265514183228536}
+  sfx: {fileID: 0}
 --- !u!1 &7967564246602207494
 GameObject:
   m_ObjectHideFlags: 0

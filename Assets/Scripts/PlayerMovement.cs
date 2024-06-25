@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public ParticleSystem playerTrail;
 
     public float moveSpeed = 5f;
-    public float rotationSpeed = 100f;
+    public float rotationSpeed = 150f;
     public float acceleration = 5f;
     public float deceleration = 10f;
     public float boostSpeed = 10f;
