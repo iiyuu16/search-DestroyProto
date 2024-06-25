@@ -4,13 +4,13 @@ public class PlayerAttack : MonoBehaviour
 {
     public ParticleSystem slashFX;
     public Collider attkCol;
-    public float cooldownTime = .1f;
-    public float colliderDisableTime = .1f;
+    public float cooldownTime = 0.1f;
+    public float colliderDisableTime = 0.1f;
     private float cooldownTimer;
     public int attkDMG = 1;
     public KeyCode Attack;
 
-    public PlayerMovement playerMovement; // Reference to PlayerMovement script
+    public PlayerMovement playerMovement;
     public soundSource sfx;
 
     void Start()
@@ -29,7 +29,6 @@ public class PlayerAttack : MonoBehaviour
     {
         cooldownTimer -= Time.deltaTime;
 
-        // Check if the player is not stunned and the attack input is pressed
         if (!playerMovement.isStunned && cooldownTimer <= 0f && Input.GetKey(Attack))
         {
             slashFX.Play();
@@ -45,5 +44,25 @@ public class PlayerAttack : MonoBehaviour
     void DisableCollider()
     {
         attkCol.enabled = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            ScoreManager.instance.AddScore(100);
+        }
+        else if (other.CompareTag("Shield"))
+        {
+            ScoreManager.instance.AddScore(500);
+        }
+        else if (other.CompareTag("Target"))
+        {
+            ScoreManager.instance.AddScore(1500);
+        }
+        else if (other.CompareTag("Turret"))
+        {
+            ScoreManager.instance.AddScore(1000);
+        }
     }
 }

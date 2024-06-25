@@ -52,7 +52,7 @@ Material:
     - _Cull: 2
     - _DstBlend: 10
     - _Fill: 0.15
-    - _FresnelPower: 1.8
+    - _FresnelPower: 1.5
     - _Offset: 0.6
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -65,7 +65,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Emission: {r: 0.5849056, g: 0, b: 0.00913915, a: 1}
+    - _Emission: {r: 2.828427, g: 0, b: 0.03796588, a: 1}
     - _PatternSize: {r: 2, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3468488400371486621
