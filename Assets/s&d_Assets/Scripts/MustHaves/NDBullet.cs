@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NDBullet : MonoBehaviour
+public class sdNDBullet : MonoBehaviour
 {
     public float bulletLife = 5f;
     public Renderer bulletSkin;
@@ -23,7 +23,7 @@ public class NDBullet : MonoBehaviour
             sparksFX.Play();
             smokeFX.Play();
             fireFX.Play();
-            PlayerMovement.instance.PlayerHit();
+            sdPlayerMovement.instance.PlayerHit();
             col.enabled = false;
             bulletSkin.enabled = false;
             StartCoroutine(DelayDestroy());

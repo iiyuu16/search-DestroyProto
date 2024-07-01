@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class sdEnemy : MonoBehaviour
 {
     public float revealDuration = 3f;
     private bool isRevealed = false;
@@ -13,14 +13,13 @@ public class Enemy : MonoBehaviour
     public ParticleSystem fireFX;
     public ParticleSystem smokeFX;
 
-    private Transform parentTransform; // Reference to the parent's transform
+    private Transform parentTransform;
 
-    public soundSource sfx;
+    public sdSoundSource sfx;
 
     private void Start()
     {
         shieldObject.SetActive(false);
-        // Get the parent's transform
         parentTransform = transform.parent;
     }
 
@@ -73,7 +72,6 @@ public class Enemy : MonoBehaviour
                 fireFX.Play();
                 sfx.explosionSFX();
                 Destroy(vulnerableObject);
-                // Check if the parent exists and destroy it if it does
                 if (parentTransform != null)
                 {
                     Destroy(parentTransform.gameObject);

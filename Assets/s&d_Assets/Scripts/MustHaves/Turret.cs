@@ -10,7 +10,7 @@ public class Turret : MonoBehaviour
     public float bulletSpeed;
     public int maxHP = 5;
     private int currentHP;
-    public PlayerAttack plyr;
+    public sdPlayerAttack plyr;
     public Renderer turretSkin;
 
     public ParticleSystem hitFX;
@@ -23,7 +23,7 @@ public class Turret : MonoBehaviour
     private float nextFireTime;
     private int bulletIndex = 0; // Index to keep track of the current bullet type to fire
 
-    public soundSource sfx;
+    public sdSoundSource sfx;
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-        if (Time.time >= nextFireTime && !PlayerMovement.instance.isStunned)
+        if (Time.time >= nextFireTime && !sdPlayerMovement.instance.isStunned)
         {
             ShootAtPlayer();
             nextFireTime = Time.time + 1 / fireRate;

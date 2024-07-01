@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WinConditionManager : MonoBehaviour
+public class sdWinConditionManager : MonoBehaviour
 {
     public GameObject[] targetGameObjects;
     public GameObject winScreen;

@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour
+public class sdPlayerMovement : MonoBehaviour
 {
-    public static PlayerMovement instance;
+    public static sdPlayerMovement instance;
     public StunEffects stunEffects;
     public ParticleSystem playerTrail;
 
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public Slider sliderHP;
 
     public KeyCode BoostKey;
-    public soundSource sfx;
+    public sdSoundSource sfx;
 
     private void Awake()
     {
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isStunned = true;
             Debug.Log("Stunned state activated");
-            sfx.stunSFX(); // Start looping stun sound
+            sfx.stunSFX();
             currentSpeed = 0f;
 
             recoveryCoroutine = StartCoroutine(RecoveryState());
@@ -107,8 +107,8 @@ public class PlayerMovement : MonoBehaviour
 
         GetComponent<Collider>().enabled = true;
         stunEffects.DisableStunEffects();
-        sfx.stopStunSFX(); // Stop looping stun sound
-        sfx.recoverSFX(); // Play recover sound
+        sfx.stopStunSFX();
+        sfx.recoverSFX();
         isStunned = false;
         Debug.Log("Player recovered");
         currHP = maxHP;

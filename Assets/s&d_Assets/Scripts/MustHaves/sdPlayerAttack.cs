@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class sdPlayerAttack : MonoBehaviour
 {
     public ParticleSystem slashFX;
     public Collider attkCol;
@@ -10,8 +10,8 @@ public class PlayerAttack : MonoBehaviour
     public int attkDMG = 1;
     public KeyCode Attack;
 
-    public PlayerMovement playerMovement;
-    public soundSource sfx;
+    public sdPlayerMovement playerMovement;
+    public sdSoundSource sfx;
 
     void Start()
     {
@@ -50,19 +50,19 @@ public class PlayerAttack : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-            ScoreManager.instance.AddScore(100);
+            sdScoreManager.instance.AddScore(100);
         }
         else if (other.CompareTag("Shield"))
         {
-            ScoreManager.instance.AddScore(500);
+            sdScoreManager.instance.AddScore(500);
         }
         else if (other.CompareTag("Target"))
         {
-            ScoreManager.instance.AddScore(1500);
+            sdScoreManager.instance.AddScore(1500);
         }
         else if (other.CompareTag("Turret"))
         {
-            ScoreManager.instance.AddScore(1000);
+            sdScoreManager.instance.AddScore(1000);
         }
     }
 }

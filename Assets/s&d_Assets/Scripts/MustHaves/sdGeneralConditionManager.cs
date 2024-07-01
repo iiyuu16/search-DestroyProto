@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GeneralConditionManager : MonoBehaviour
+public class sdGeneralConditionManager : MonoBehaviour
 {
     public GameObject[] targetGameObjects;
     public GameObject[] objToBeEnabled;

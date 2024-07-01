@@ -23,7 +23,7 @@ public class StunEffects : MonoBehaviour
             return;
         }
 
-        VolumeManager.instance.Initialize();
+        sdVolumeManager.instance.Initialize();
     }
 
     public void EnableStunEffects()
@@ -38,7 +38,7 @@ public class StunEffects : MonoBehaviour
             countdownText.gameObject.SetActive(true);
         }
 
-        VolumeManager.instance.EnableVignette();
+        sdVolumeManager.instance.EnableVignette();
     }
 
     public void DisableStunEffects()
@@ -53,7 +53,7 @@ public class StunEffects : MonoBehaviour
             countdownText.gameObject.SetActive(false);
         }
 
-        VolumeManager.instance.DisableVignette();
+        sdVolumeManager.instance.DisableVignette();
     }
 
     public void ShowRecoveryTime(float recoveryTime)

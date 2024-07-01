@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RespawnPoint : MonoBehaviour
+public class sdRespawnPoint : MonoBehaviour
 {
     public Transform respawnPoint;
 

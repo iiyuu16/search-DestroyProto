@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class soundSource : MonoBehaviour
+public class sdSoundSource : MonoBehaviour
 {
     public AudioSource src;
     public AudioClip hit, hurt, scan, slash, stunned, explosion, recover, boost, reveal;

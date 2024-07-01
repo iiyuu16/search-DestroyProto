@@ -2,13 +2,12 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class VolumeManager : MonoBehaviour
+public class sdVolumeManager : MonoBehaviour
 {
-    public static VolumeManager instance;
+    public static sdVolumeManager instance;
 
-    public VolumeProfile volumeProfile; // Reference to the global volume profile
-
-    private Vignette vignette; // Reference to the vignette effect
+    public VolumeProfile volumeProfile;
+    private Vignette vignette;
 
     private void Awake()
     {
@@ -34,7 +33,6 @@ public class VolumeManager : MonoBehaviour
             return;
         }
 
-        // Try to get the vignette effect from the volume profile
         if (!volumeProfile.TryGet(out vignette))
         {
             Debug.LogError("Vignette effect is not found in the assigned Volume Profile!");

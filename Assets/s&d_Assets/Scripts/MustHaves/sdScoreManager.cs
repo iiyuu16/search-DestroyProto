@@ -1,9 +1,9 @@
 using UnityEngine;
 using TMPro;
 
-public class ScoreManager : MonoBehaviour
+public class sdScoreManager : MonoBehaviour
 {
-    public static ScoreManager instance;
+    public static sdScoreManager instance;
     public int score = 0;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI obtainedScoreText;

@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class InitScan : MonoBehaviour
+public class sdInitScan : MonoBehaviour
 {
-    public static InitScan instance;
+    public static sdInitScan instance;
     public event Action<float> OnRevealDurationOver;
     public ParticleSystem scanner;
     public float scanDuration = 3f;
@@ -17,12 +17,12 @@ public class InitScan : MonoBehaviour
     private SphereCollider sphereCollider;
     private bool isExpanding = false;
     private Material originalMaterial;
-    private PlayerMovement playerMovement; // Reference to PlayerMovement script
+    private sdPlayerMovement playerMovement;
 
     private Coroutine revertMaterialCoroutine;
 
     public KeyCode Scan;
-    public soundSource sfx;
+    public sdSoundSource sfx;
 
     void Start()
     {
@@ -42,7 +42,7 @@ public class InitScan : MonoBehaviour
         }
 
         // Get reference to PlayerMovement script
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement = FindObjectOfType<sdPlayerMovement>();
     }
 
     void Update()
