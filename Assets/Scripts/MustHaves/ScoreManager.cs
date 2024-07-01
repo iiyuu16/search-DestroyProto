@@ -31,7 +31,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = score.ToString("D8");
+            scoreText.text = FormatScore(score);
         }
     }
 
@@ -39,7 +39,13 @@ public class ScoreManager : MonoBehaviour
     {
         if (obtainedScoreText != null)
         {
-            obtainedScoreText.text = "Obtained " + score.ToString("D8") + " Fr.";
+            obtainedScoreText.text = "Obtained " + FormatScore(score) + " Fr.";
         }
+    }
+
+    private string FormatScore(int score)
+    {
+        string scoreStr = score.ToString();
+        return scoreStr.PadLeft(8, ' ');
     }
 }
